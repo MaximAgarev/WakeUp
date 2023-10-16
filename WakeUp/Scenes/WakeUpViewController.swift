@@ -57,7 +57,7 @@ final class WakeUpViewController: UIViewController {
         addRecordButton()
         addWakeUpButton()
         
-        let _ = storage.loadRecords()
+        storage.loadRecords()
     }
     
     // MARK: - Private Methods
@@ -69,12 +69,11 @@ final class WakeUpViewController: UIViewController {
     @objc
     private func didTapWakeUpButton(sender: Any) {
         let df = DateFormatter()
-        df.dateFormat = "dd.MM.yy"
-        let date = df.string(from: Date())
         df.dateFormat = "HH:mm"
-        let time = df.string(from: Date())
+        let date = Date().withoutSeconds()
+        let time = df.string(from: date)
         
-        storage.saveRecord(date: date, time: time)
+        storage.saveRecord(date: date)
 
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
         wakeUpTimeLabel.text = time

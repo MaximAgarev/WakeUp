@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D0012A8A2AD1794C00CD39BD /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0012A892AD1794C00CD39BD /* Storage.swift */; };
 		D018E3E42ADC482F007F2B3D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018E3E32ADC482F007F2B3D /* Colors.swift */; };
+		D018E3E72ADC7D6E007F2B3D /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D018E3E62ADC7D6E007F2B3D /* Date+Extensions.swift */; };
 		D06823522AD0480900D95AAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06823512AD0480900D95AAE /* AppDelegate.swift */; };
 		D06823542AD0480900D95AAE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06823532AD0480900D95AAE /* SceneDelegate.swift */; };
 		D06823562AD0480900D95AAE /* WakeUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06823552AD0480900D95AAE /* WakeUpViewController.swift */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		D0012A892AD1794C00CD39BD /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		D018E3E32ADC482F007F2B3D /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		D018E3E62ADC7D6E007F2B3D /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		D068234E2AD0480900D95AAE /* WakeUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WakeUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D06823512AD0480900D95AAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D06823532AD0480900D95AAE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,14 @@
 			path = "Design system";
 			sourceTree = "<group>";
 		};
+		D018E3E52ADC7D59007F2B3D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D018E3E62ADC7D6E007F2B3D /* Date+Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		D06823452AD0480900D95AAE = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +95,7 @@
 		D06823502AD0480900D95AAE /* WakeUp */ = {
 			isa = PBXGroup;
 			children = (
+				D018E3E52ADC7D59007F2B3D /* Helpers */,
 				D018E3E22ADC4812007F2B3D /* Design system */,
 				D018E3E12ADC47F9007F2B3D /* Storage */,
 				D018E3E02ADC47CF007F2B3D /* Scenes */,
@@ -169,6 +180,7 @@
 			files = (
 				D06823562AD0480900D95AAE /* WakeUpViewController.swift in Sources */,
 				D018E3E42ADC482F007F2B3D /* Colors.swift in Sources */,
+				D018E3E72ADC7D6E007F2B3D /* Date+Extensions.swift in Sources */,
 				D06823522AD0480900D95AAE /* AppDelegate.swift in Sources */,
 				D06823542AD0480900D95AAE /* SceneDelegate.swift in Sources */,
 				D06823662AD04C6400D95AAE /* RecordsViewController.swift in Sources */,

@@ -5,7 +5,7 @@ final class RecordsViewController: UIViewController {
     //MARK: - Private properties
     private let storage = RecordsStorage.shared
     
-    private var dates: Set<String> = []
+//    private var dates: Set<String> = []
     
     //MARK: - Layout elements
     private lazy var closeButton: UIButton = {
@@ -25,6 +25,7 @@ final class RecordsViewController: UIViewController {
         recordsTable.translatesAutoresizingMaskIntoConstraints = false
         recordsTable.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         recordsTable.register(UITableViewCell.self, forCellReuseIdentifier: "RecordCell")
+        recordsTable.sectionHeaderTopPadding = 0
         recordsTable.sectionHeaderHeight = 50
         recordsTable.allowsSelection = false
         recordsTable.dataSource = self
@@ -40,10 +41,7 @@ final class RecordsViewController: UIViewController {
         
         addCloseButton()
         addRecordsTable()
-        
-        storage.loadRecords().forEach { record in
-            dates.insert(record.0)
-        }
+                
     }
     
     // MARK: - Private Methods
@@ -77,38 +75,62 @@ final class RecordsViewController: UIViewController {
 // MARK: - Extensions
 extension RecordsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        if storage.getDates().isEmpty { return 0 }
+        let dateInSection = storage.getDates()[section]
+        return storage.getTimes(for: dateInSection).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecordCell", for: indexPath as IndexPath)
         cell.backgroundColor = .white
         cell.textLabel?.textColor = .black
-        cell.textLabel?.text = "Test"
+        
+        let date = storage.getDates()[indexPath.section]
+        let time = storage.getTimeStrings(for: date)[indexPath.row]
+        cell.textLabel?.text = time
         cell.textLabel?.highlightedTextColor = .white
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        dates.count
+        if storage.getDates().isEmpty {
+            return 1
+        } else {
+            return storage.getDates().count
+        }
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
-//        headerView.backgroundColor = .red
-//        
-//        let label = UILabel()
-//        label.frame = CGRect.init(x: 16, y: 0, width: headerView.frame.width, height: headerView.frame.height)
-//        label.text = Array(dates.sorted {
-//            DateFormatter().date(from: $0) ?? Date() > DateFormatter().date(from: $1) ?? Date()
-//        })[section]
-//        label.font = .boldSystemFont(ofSize: 32)
-//        label.textColor = .black
-//        
-//        headerView.addSubview(label)
-//        
-//        return headerView
-//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
+        headerView.backgroundColor = .white
+        
+        let label = UILabel()
+        label.frame = CGRect.init(x: 16, y: 0, width: headerView.frame.width, height: headerView.frame.height)
+        label.font = .boldSystemFont(ofSize: 32)
+        label.textColor = .blue
+        
+        if storage.getDateString().isEmpty {
+            label.text = "No records yet"
+        } else {
+            label.text = String(storage.getDateString()[section])
+        }
+        
+        headerView.addSubview(label)
+        
+        return headerView
+    }
 }
 
-extension RecordsViewController: UITableViewDelegate {}
+extension RecordsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let actionDelete = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
+            let date = self.storage.getDates()[indexPath.section]
+            let time = self.storage.getTimes(for: date)[indexPath.row]
+            self.storage.deleteRecord(time: time)
+            self.recordsTable.reloadData()
+        }
+        let actions = UISwipeActionsConfiguration(actions: [actionDelete])
+        return actions
+    }
+    
+}
