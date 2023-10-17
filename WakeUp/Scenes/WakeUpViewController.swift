@@ -15,7 +15,7 @@ final class WakeUpViewController: UIViewController {
         recordsButton.layer.cornerRadius = 16
         recordsButton.layer.borderWidth = 1
         recordsButton.layer.borderColor = UIColor.blue.cgColor
-        recordsButton.setTitle(" Wakeups", for: .normal)
+        recordsButton.setTitle("  Wakeups", for: .normal)
         recordsButton.setTitleColor(.blue, for: .normal)
         recordsButton.titleLabel?.font = .systemFont(ofSize: 16)
         recordsButton.setImage(UIImage(systemName: "list.bullet.rectangle"), for: .normal)
@@ -109,6 +109,6 @@ final class WakeUpViewController: UIViewController {
             wakeUpTimeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             wakeUpTimeLabel.centerYAnchor.constraint(equalTo: wakeUpButton.topAnchor, constant: 175)
         ])
-    }
+    } //+19168005551
 }
 
